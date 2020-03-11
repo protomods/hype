@@ -1,0 +1,42 @@
+.register {
+  width: 600px;
+  display: inline-block;
+}
+
+fieldset {
+  display: inline-block;
+}
+
+.login {
+  width: 600px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+button {
+  background-color: #008080;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=date] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+select {
+  height: 50px;
+  width: 100px;
+}
+
+li {
+  color: red;
+}

@@ -1,0 +1,88 @@
+<br>
+<%= link_to "Home", shoes_path %>
+<h1><%= current_user.first_name %>'s User Dashboard</h1>
+
+<form action="/products" method="POST" class="product-form">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <fieldset>
+    <legend>Sell Product</legend>
+    <label for="product_name">Product Name:</label>
+    <input type="text" name="product[product_name]">
+    <label for="amount">Amount:</label>
+    <input type="text" name="product[amount]" placeholder="$">
+    <button>Sell</button>
+  </fieldset>
+</form>
+
+
+<h3>Your shoes that are not yet sold:</h3>
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Date Posted</th>
+    <th>Amount</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @products_left.each do |product| %>
+    <tr>
+      <td><%= product.product_name %></td>
+      <td><%= product.created_at.strftime("%B %d, %Y") %></td>
+      <td><%= product.amount %></td>
+      <td>
+        <form action = "/products/<%= product.id %>" method = "post">
+					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+					<input type="hidden" name="_method" value="delete">
+					<input type = 'submit' value = 'Remove'>
+				</form>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Shoe Sales:</h3>
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Date Sold</th>
+    <th>Buyer</th>
+    <th>Amount</th>
+  </thead>
+  <tbody>
+    <% @sales_total = 0 %>
+    <% @products_sold.each do |product| %>
+    <tr>
+      <td><%= product.product.product_name %></td>
+      <td><%= product.created_at.strftime("%B %d, %Y") %></td>
+      <td><%= product.buyer.first_name %></td>
+      <td><%= product.product.amount %></td>
+      <% @sales_total += product.product.amount %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h5 class="total">Total Earned: $<%= @sales_total %></h5>
+
+<h3>Your Purchases:</h3>
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Date Purchased</th>
+    <th>Seller</th>
+    <th>Amount</th>
+  </thead>
+  <tbody>
+    <% @purchase_total = 0 %>
+    <% @my_purchases.each do |purchase| %>
+    <tr>
+      <td><%= purchase.product.product_name %></td>
+      <td><%= purchase.created_at.strftime("%B %d, %Y") %></td>
+      <td><%= purchase.product.user.first_name %></td>
+      <td><%= purchase.product.amount %></td>
+      <% @purchase_total += purchase.product.amount %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h5 class="total">Total Spent: $<%= @purchase_total %></h5>

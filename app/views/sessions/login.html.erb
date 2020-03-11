@@ -1,0 +1,30 @@
+<h1>Welcome!</h1>
+
+<form action="/users" method="POST" class="register">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <fieldset>
+    <legend>Register</legend>
+    <label for="first_name">First Name:</label>
+    <input type="text" name="user[first_name]">
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="user[last_name]">
+    <label for="email">Email:</label>
+    <input type="email" name="user[email]">
+    <label for="password">Password:</label>
+    <input type="password" name="user[password]">
+    <label for="confirm_password">Confirm PW:</label>
+    <input type="password" name="user[password_confirmation]">
+    <button>Register</button>
+  </fieldset>
+</form>
+<form action="/sessions" method="POST" class="login">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <fieldset>
+    <legend>Login</legend>
+    <label for="email">Email:</label>
+    <input type="email" name="user[email]">
+    <label for="password">Password:</label>
+    <input type="password" name="user[password]">
+    <button>Login</button>
+  </fieldset>
+</form>
